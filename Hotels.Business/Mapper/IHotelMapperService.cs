@@ -1,6 +1,7 @@
 ﻿using Hotels.Domain.Entities;
 using Hotels.Domain.Models;
 using Hotels.Domain.Request;
+using Hotels.Domain.Response;
 
 namespace Hotels.Business.Mapper
 {
@@ -11,5 +12,6 @@ namespace Hotels.Business.Mapper
         RoomDto MapToRoomEntity(SaveRoomRequest request, long? parentId = null, RoomDto? entity = null);
 
         ReservationDto MapEntityToReservationDto(Reservation request);
+        GetRoomResponse MapHotelToGetRoomsResponse(Hotel hotel);
     }
 }

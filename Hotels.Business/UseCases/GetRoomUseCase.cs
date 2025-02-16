@@ -1,22 +1,22 @@
 ﻿using Hotels.Business.Mapper;
-using Hotels.Domain.Models;
+using Hotels.Domain.Entities;
+using Hotels.Domain.Request;
+using Hotels.Domain.Response;
 using Hotels.Infrastructure.Repositories;
 
 namespace Hotels.Business.UseCases
 {
-    public class GetRoomUseCase(IHotelRepository _repository, IHotelMapperService _mapperService) : IGetReservationsUseCase
+    public class GetRoomUseCase(IHotelRepository _repository, IHotelMapperService _mapperService) : IGetRoomUseCase
     {
-        public async Task<List<ReservationDto>> ExecuteAsync(GetResevationRequestDto getResevationRequestDto)
+        public async Task<List<GetRoomResponse>> ExecuteAsync(GetRoomRequest getRoomRequest)
         {
             try
             {
                 await _repository.BeginTransaction();
-                var result = await _repository.GetReservationsById(getResevationRequestDto);
-                if (result is null || result.Count == 0)
-                    return [];
-
-                var resultDto = result.Select(_mapperService.MapEntityToReservationDto).ToList();
-                return resultDto;
+                List<Hotel> searchResult = await _repository.SearchRooms(getRoomRequest);
+                if (searchResult is null || searchResult.Count == 0) return [];
+                List<GetRoomResponse> results = searchResult.Select(_mapperService.MapHotelToGetRoomsResponse).ToList();
+                return results;
             }
             catch
             {

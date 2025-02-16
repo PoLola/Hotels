@@ -24,12 +24,15 @@ namespace Hotels.Domain.Entities
         public decimal Price { get; set; }
 
         [Column("taxes")]
-        public string? Taxes { get; set; }
+        public decimal Taxes { get; set; }
 
         [Column("type")]
         public string Type { get; set; }
 
         [Column("location")]
-        public string location { get; set; }
+        public string Location { get; set; }
+
+        [Column("maxcapacity")]
+        public int MaxCapacity { get; set; }
     }
 }

@@ -11,6 +11,10 @@ namespace Hotels.Domain.Models
 
         public bool IsEnabled { get; set; }
 
+        public string City { get; set; }
+
+        public string Address { get; set; }
+
         public string Name { get; set; }
 
         public ICollection<RoomDto> Rooms { get; set; } = [];

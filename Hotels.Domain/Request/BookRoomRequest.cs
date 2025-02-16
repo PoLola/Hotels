@@ -1,12 +1,14 @@
 ﻿using System;
+using Hotels.Domain.Models;
 
 namespace Hotels.Domain.Request
 {
-    public record GetRoomRequest(
+    public record BookRoomRequest(
         DateTime CheckIn,
         DateTime CheckOut,
         int NumPeople,
-        string City
+        int RoomId,
+        List<GuestDto> Guests
      
     );
 }

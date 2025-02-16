@@ -1,6 +1,7 @@
 ﻿#pragma warning disable CA1862 // Use the 'StringComparison' method overloads to perform case-insensitive string comparisons
 using Hotels.Domain.Entities;
 using Hotels.Domain.Models;
+using Hotels.Domain.Request;
 using Hotels.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -62,6 +63,12 @@ namespace Hotels.Infrastructure.Repositories
         public async Task<bool> IsRoomExists(long roomId)
         {
             return await _context.Rooms.AnyAsync(x => x.Id == roomId);
+        }
+
+        public async Task<List<Hotel>> SearchRooms(GetRoomRequest getRoomRequest) 
+        {
+            return await _context.Hotels.Where(x => x.IsEnabled && x.City == getRoomRequest.City)
+                .Include(x => x.Rooms.Where(x => x.IsEnabled && x.MaxCapacity >= getRoomRequest.NumPeople)).ToListAsync();
         }
 
     }

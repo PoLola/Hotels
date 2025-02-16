@@ -15,10 +15,12 @@ namespace Hotels.Domain.Models
 
         public decimal Price { get; set; }
 
-        public string? Taxes { get; set; }
+        public decimal Taxes { get; set; }
 
         public string Type { get; set; }
 
-        public string location { get; set; }
+        public string Location { get; set; }
+
+        public int MaxCapacity { get; set; }
     }
 }

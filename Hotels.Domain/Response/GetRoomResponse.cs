@@ -1,10 +1,17 @@
-﻿namespace Hotels.Domain.Request
+﻿namespace Hotels.Domain.Response
 {
     public record GetRoomResponse(
-        decimal Price,
-        decimal Taxes,
-        string Type,
-        string Location,
-        bool IsEnabled = false
+        string Address,
+        string HotelName,
+        List<GetRoomDto> Rooms
+    );
+
+    public record GetRoomDto(
+    long Id,
+    decimal Price,
+    decimal Taxes,
+    string Type,
+    string Location,
+    int MaxCapacity
     );
 }
