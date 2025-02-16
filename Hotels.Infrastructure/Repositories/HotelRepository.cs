@@ -1,5 +1,6 @@
 ﻿#pragma warning disable CA1862 // Use the 'StringComparison' method overloads to perform case-insensitive string comparisons
 using Hotels.Domain.Entities;
+using Hotels.Domain.Models;
 using Hotels.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,56 +39,30 @@ namespace Hotels.Infrastructure.Repositories
             return await _context.Rooms.FirstOrDefaultAsync(x => x.Id == roomId);
         }
 
-        public async Task<List<Reservation>?> GetReservationsById(long agencyId)
+        public async Task<List<Reservation>?> GetReservationsById(GetResevationRequestDto getReservationRequestDto)
         {
-            return await _context.Reservations.Where(x=>x.Room.Hotel.AgencyId == agencyId).ToListAsync();
+            if (getReservationRequestDto.ReservationId.HasValue)
+            {
+                return await _context.Reservations.Where(x => x.Room.Hotel.AgencyId == getReservationRequestDto.AgencyId &&
+                                                            x.Id == getReservationRequestDto.ReservationId).ToListAsync();
+            }
+            return await _context.Reservations.Where(x => x.Room.Hotel.AgencyId == getReservationRequestDto.AgencyId).ToListAsync();
         }
 
-        //private static IQueryable<Segment> ApplySearchSegmentTemplateSort(IQueryable<Segment> query, string? sortBy, SortByDirection sortByDirection)
-        //{
-        //    if (string.IsNullOrEmpty(sortBy))
-        //    {
-        //        query = query.OrderBy(o => o.AuditCreated, SortByDirection.DESC);
-        //    }
+        public async Task DeleteHotelById(long hotelId)
+        {
+            await _context.Hotels.Where(x => x.Id == hotelId).ExecuteDeleteAsync();
+        }
 
-        //    return sortBy switch
-        //    {
-        //        nameof(Segment.Name) => query.OrderBy(o => o.Name, sortByDirection),
-        //        nameof(Segment.Division) => query.OrderBy(o => o.Division, sortByDirection),
-        //        _ => query.OrderBy(o => o.AuditCreated, sortByDirection),
-        //    };
-        //}
+        public async Task DeleteRoomById(long roomId)
+        {
+            await _context.Rooms.Where(x => x.Id == roomId).ExecuteDeleteAsync();
+        }
 
-        //private static IQueryable<Step> ApplySearchStepTemplateSort(IQueryable<Step> query, string? sortBy, SortByDirection sortByDirection)
-        //{
-        //    if (string.IsNullOrEmpty(sortBy))
-        //    {
-        //        query = query.OrderBy(o => o.AuditCreated, SortByDirection.DESC);
-        //    }
-
-        //    return sortBy switch
-        //    {
-        //        nameof(Step.Name) => query.OrderBy(o => o.Name, sortByDirection),
-        //        nameof(Step.Division) => query.OrderBy(o => o.Division, sortByDirection),
-        //        _ => query.OrderBy(o => o.AuditCreated, sortByDirection),
-        //    };
-        //}
-
-        //private static IQueryable<Action> ApplySearchActionTemplateSort(IQueryable<Action> query, string? sortBy, SortByDirection sortByDirection)
-        //{
-        //    if (string.IsNullOrEmpty(sortBy))
-        //    {
-        //        query = query.OrderBy(o => o.AuditCreated, SortByDirection.DESC);
-        //    }
-
-        //    return sortBy switch
-        //    {
-        //        nameof(Action.Name) => query.OrderBy(o => o.Name, sortByDirection),
-        //        nameof(Action.Division) => query.OrderBy(o => o.Division, sortByDirection),
-        //        nameof(Action.ActionType) => query.OrderBy(o => o.ActionType, sortByDirection),
-        //        _ => query.OrderBy(o => o.AuditCreated, sortByDirection),
-        //    };
-        //}
+        public async Task<bool> IsRoomExists(long roomId)
+        {
+            return await _context.Rooms.AnyAsync(x => x.Id == roomId);
+        }
 
     }
 }

@@ -52,5 +52,20 @@ namespace Hotels.Api.Controllers
             var result = await useCase.ExecuteAsync(agencyId);
             return Ok(result);
         }
+
+        [HttpGet("rooms")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(RoomDto))]
+        public async Task<IActionResult> GetRooms(
+            [FromBody] GetRoomRequest request,
+            [FromServices] IGetRoomUseCase useCase)
+        {
+            var requestUseCase = new SaveUseCaseRequestDto<SaveHotelRequest>
+            {
+                Id = hotelId,
+                Data = request,
+            };
+            var result = await useCase.ExecuteAsync(requestUseCase);
+            return Ok(result);
+        }
     }
 }

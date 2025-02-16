@@ -43,14 +43,35 @@ namespace Hotels.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPut("{agencyId}")]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(SaveRoomResponse))]
+        [HttpGet("{agencyId}/resevations/{reservationId?}")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ReservationDto))]
         public async Task<IActionResult> GetReservations(
             [FromServices] IGetReservationsUseCase useCase,
-            [FromRoute] long agencyId)
+            [FromRoute] long agencyId, 
+            [FromRoute] long? reservationId = null)
         {
-            var result = await useCase.ExecuteAsync(agencyId);
+            GetResevationRequestDto getReservationRequestDto = new GetResevationRequestDto { ReservationId = reservationId, AgencyId = agencyId};
+            var result = await useCase.ExecuteAsync(getReservationRequestDto);
             return Ok(result);
         }
+
+        [HttpDelete("hotel/{hotelId}")]
+        public async Task<IActionResult> DeleteHotel(
+            [FromServices] IDeleteHotelUseCase useCase,
+            [FromRoute] long hotelId)
+        {
+            await useCase.ExecuteAsync(hotelId);
+            return Ok();
+        }
+
+        [HttpDelete("room/{roomId}")]
+        public async Task<IActionResult> DeleteRoom(
+            [FromServices] IDeleteRoomUseCase useCase,
+            [FromRoute] long roomId)
+        {
+            await useCase.ExecuteAsync(roomId);
+            return Ok();
+        }
+
     }
 }

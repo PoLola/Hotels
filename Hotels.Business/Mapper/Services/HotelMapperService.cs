@@ -17,9 +17,9 @@ namespace Hotels.Business.Mapper.Services
             return result;
         }
 
-        public Room MapToRoomEntity(SaveRoomRequest request, long? parentId = null, Room? entity = null)
+        public RoomDto MapToRoomEntity(SaveRoomRequest request, long? parentId = null, RoomDto? entity = null)
         {
-            var result = _mapper.Map(request, entity ?? new Room());
+            var result = _mapper.Map(request, entity ?? new RoomDto());
             if (parentId.HasValue)
                 result.HotelId = parentId.Value;
 

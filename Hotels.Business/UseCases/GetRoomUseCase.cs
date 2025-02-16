@@ -4,7 +4,7 @@ using Hotels.Infrastructure.Repositories;
 
 namespace Hotels.Business.UseCases
 {
-    public class GetReservationsUseCase(IHotelRepository _repository, IHotelMapperService _mapperService) : IGetReservationsUseCase
+    public class GetRoomUseCase(IHotelRepository _repository, IHotelMapperService _mapperService) : IGetReservationsUseCase
     {
         public async Task<List<ReservationDto>> ExecuteAsync(GetResevationRequestDto getResevationRequestDto)
         {

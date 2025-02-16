@@ -1,4 +1,6 @@
-﻿using Hotels.Domain.Entities;
+﻿using System.Threading.Tasks;
+using Hotels.Domain.Entities;
+using Hotels.Domain.Models;
 
 namespace Hotels.Infrastructure.Repositories
 {
@@ -14,6 +16,9 @@ namespace Hotels.Infrastructure.Repositories
 
         Task<Room?> GetRoomById(long roomId);
 
-        Task<List<Reservation>?> GetReservationsById(long agencyId);
+        Task DeleteHotelById(long hotelId);
+        Task DeleteRoomById(long roomId);
+        Task<bool> IsRoomExists(long roomId);
+        Task<List<Reservation>> GetReservationsById(GetResevationRequestDto getResevationRequestDto);
     }
 }

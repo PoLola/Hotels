@@ -13,7 +13,7 @@ namespace Hotels.Business.Mapper.Profiles
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
                 .ForMember(dest => dest.Rooms, opt => opt.Ignore());
 
-            CreateMap<SaveRoomRequest, Room>()
+            CreateMap<SaveRoomRequest, RoomDto>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
                 .ForMember(dest => dest.HotelId, opt => opt.Ignore())
                 .ForMember(dest => dest.Hotel, opt => opt.Ignore());

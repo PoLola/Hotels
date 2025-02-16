@@ -84,6 +84,7 @@ namespace Hotels.Api
         {
             services.AddScoped<ISaveHotelUseCase, SaveHotelUseCase>();
             services.AddScoped<ISaveRoomUseCase, SaveRoomUseCase>();
+            //services.AddScoped<ISaveReservationUseCase, SaveReservationUseCase>();
         }
 
         private void AddRepositories(IServiceCollection services)
