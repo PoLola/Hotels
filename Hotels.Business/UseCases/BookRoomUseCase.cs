@@ -18,6 +18,7 @@ namespace Hotels.Business.UseCases
                 long reservationId = await _repository.BookRoom(reservation);
                 BookRoomResponse bookRoomResponse = new BookRoomResponse(reservationId, bookRoomRequestDto.Data);
                 await _repository.SendEmailConfirmation(bookRoomResponse);
+                await _repository.CommitTransaction();
                 return bookRoomResponse;
             }
             catch

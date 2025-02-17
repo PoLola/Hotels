@@ -37,6 +37,7 @@ namespace Hotels.Business.Mapper.Profiles
                 .ForMember(dest => dest.RoomId, opt => opt.MapFrom(src => src.RoomId))
                 .ForMember(dest => dest.EmergencyName, opt => opt.MapFrom(src => src.Data.EmergencyName))
                 .ForMember(dest => dest.EmergencyPhone, opt => opt.MapFrom(src => src.Data.EmergencyPhoneNumber))
+                .ForMember(dest => dest.Guests, opt => opt.MapFrom(src => src.Data.Guests))
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
 
             CreateMap<GuestDto, Guest>()

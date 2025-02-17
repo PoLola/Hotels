@@ -1,17 +1,19 @@
 ﻿namespace Hotels.Domain.Response
 {
-    public record GetRoomResponse(
-        string Address,
-        string HotelName,
-        List<GetRoomDto> Rooms
-    );
+    public record GetRoomResponse
+    {
+        public string Address { get; set; }
+        public string HotelName { get; set; }
+        public List<GetRoomDto> Rooms { get; set; }
+    }
 
-    public record GetRoomDto(
-    long Id,
-    decimal Price,
-    decimal Taxes,
-    string Type,
-    string Location,
-    int MaxCapacity
-    );
+    public record GetRoomDto
+    {
+        public long Id { get; set; }
+        public decimal Price { get; set; }
+        public decimal Taxes { get; set; }
+        public string Type { get; set; }
+        public string Location { get; set; }
+        public int MaxCapacity { get; set; }
+    }
 }
