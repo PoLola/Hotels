@@ -9,9 +9,10 @@ namespace Hotels.Business.Mapper
     {
         Hotel MapToHotelEntity(SaveHotelRequest request, Hotel? entity = null);
 
-        RoomDto MapToRoomEntity(SaveRoomRequest request, long? parentId = null, RoomDto? entity = null);
+        Room MapToRoomEntity(SaveRoomRequest request, long? parentId = null, Room? entity = null);
 
         ReservationDto MapEntityToReservationDto(Reservation request);
         GetRoomResponse MapHotelToGetRoomsResponse(Hotel hotel);
+        Reservation MapBookRoomToReservation(BookRoomRequestDto bookRoomRequestDto);
     }
 }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hotels.Infrastructure.Migrations
 {
     [DbContext(typeof(HotelContext))]
-    [Migration("20250213195531_InitialCreate")]
+    [Migration("20250217000257_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -88,9 +88,19 @@ namespace Hotels.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("address");
+
                     b.Property<long>("AgencyId")
                         .HasColumnType("bigint")
                         .HasColumnName("agencyid");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("city");
 
                     b.Property<bool>("IsEnabled")
                         .HasColumnType("bit")
@@ -153,22 +163,26 @@ namespace Hotels.Infrastructure.Migrations
                         .HasColumnType("bit")
                         .HasColumnName("isenabled");
 
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("location");
+
+                    b.Property<int>("MaxCapacity")
+                        .HasColumnType("int")
+                        .HasColumnName("maxcapacity");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("Taxes")
-                        .HasColumnType("nvarchar(max)")
+                    b.Property<decimal>("Taxes")
+                        .HasColumnType("decimal(18,2)")
                         .HasColumnName("taxes");
 
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("type");
-
-                    b.Property<string>("location")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("location");
 
                     b.HasKey("Id");
 

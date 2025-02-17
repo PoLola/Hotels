@@ -5,6 +5,7 @@
         decimal Taxes,
         string Type,
         string Location,
+        int MaxCapacity,
         bool IsEnabled = false
     );
 }

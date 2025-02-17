@@ -4,12 +4,6 @@ namespace Hotels.Domain.Models
 {
     public class GuestDto
     {
-        public long Id { get; set; }
-
-        public long ReservationId { get; set; }
-
-        public ReservationDto Reservation { get; set; }
-
         public string Name { get; set; }
 
         public DateTime Birthdate { get; set; }

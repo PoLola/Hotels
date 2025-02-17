@@ -19,6 +19,8 @@ namespace Hotels.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     agencyid = table.Column<long>(type: "bigint", nullable: false),
                     isenabled = table.Column<bool>(type: "bit", nullable: false),
+                    city = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -35,9 +37,10 @@ namespace Hotels.Infrastructure.Migrations
                     hotelid = table.Column<long>(type: "bigint", nullable: false),
                     isenabled = table.Column<bool>(type: "bit", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    taxes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    taxes = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    location = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    location = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    maxcapacity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

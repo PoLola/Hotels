@@ -18,9 +18,9 @@ namespace Hotels.Business.Mapper.Services
             return result;
         }
 
-        public RoomDto MapToRoomEntity(SaveRoomRequest request, long? parentId = null, RoomDto? entity = null)
+        public Room MapToRoomEntity(SaveRoomRequest request, long? parentId = null, Room? entity = null)
         {
-            var result = _mapper.Map(request, entity ?? new RoomDto());
+            var result = _mapper.Map(request, entity ?? new Room());
             if (parentId.HasValue)
                 result.HotelId = parentId.Value;
 
@@ -42,5 +42,11 @@ namespace Hotels.Business.Mapper.Services
 
         }
 
+        public Reservation MapBookRoomToReservation(BookRoomRequestDto bookRoomRequestDto)
+        {
+            var result = _mapper.Map<Reservation>(bookRoomRequestDto);
+
+            return result;
+        }
     }
 }
