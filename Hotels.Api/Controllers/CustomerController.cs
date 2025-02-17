@@ -9,47 +9,27 @@ namespace Hotels.Api.Controllers
 {
     public class CustomerController : BaseController
     {
-        [HttpPut("hotel/{hotelId?}")]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(SaveHotelResponse))]
-        public async Task<IActionResult> SaveHotel(
-            [FromBody] SaveHotelRequest request,
-            [FromServices] ISaveHotelUseCase useCase,
-            [FromRoute] long? hotelId = null)
+
+        [HttpPost("rooms")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(RoomDto))]
+        public async Task<IActionResult> GetRooms(
+            [FromBody] GetRoomRequest request,
+            [FromServices] IGetRoomUseCase useCase)
         {
-            var requestUseCase = new SaveUseCaseRequestDto<SaveHotelRequest>
-            {
-                Id = hotelId,
-                Data = request,
-            };
-            var result = await useCase.ExecuteAsync(requestUseCase);
+            var result = await useCase.ExecuteAsync(request);
             return Ok(result);
         }
 
-        [HttpPut("hotel/{hotelId}/room/{roomId?}")]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(SaveRoomResponse))]
-        public async Task<IActionResult> SaveRoom(
-            [FromBody] SaveRoomRequest request,
-            [FromServices] ISaveRoomUseCase useCase,
-            [FromRoute] long hotelId,
-            [FromRoute] long? roomId = null)
-        {
-            var requestUseCase = new SaveUseCaseRequestDto<SaveRoomRequest>
-            {
-                Id = roomId,
-                ParentId = hotelId,
-                Data = request,
-            };
-            var result = await useCase.ExecuteAsync(requestUseCase);
-            return Ok(result);
-        }
 
-        [HttpPut("{agencyId}")]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(SaveRoomResponse))]
-        public async Task<IActionResult> GetReservations(
-            [FromServices] IGetReservationsUseCase useCase,
-            [FromRoute] long agencyId)
+        [HttpPost("room/{roomId}/book")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(RoomDto))]
+        public async Task<IActionResult> BookRoom(
+            [FromBody] BookRoomRequest request,
+            [FromServices] IBookRoomUseCase useCase,
+            [FromRoute] long roomId)
         {
-            var result = await useCase.ExecuteAsync(agencyId);
+            BookRoomRequestDto book = new BookRoomRequestDto(request, roomId);
+            var result = await useCase.ExecuteAsync(book);
             return Ok(result);
         }
     }

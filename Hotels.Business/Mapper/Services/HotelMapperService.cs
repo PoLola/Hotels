@@ -2,6 +2,7 @@
 using Hotels.Domain.Entities;
 using Hotels.Domain.Models;
 using Hotels.Domain.Request;
+using Hotels.Domain.Response;
 using System;
 
 namespace Hotels.Business.Mapper.Services
@@ -33,5 +34,19 @@ namespace Hotels.Business.Mapper.Services
             return result;
         }
 
+        public GetRoomResponse MapHotelToGetRoomsResponse(Hotel hotel)
+        {
+            var result = _mapper.Map<GetRoomResponse>(hotel);
+
+            return result;
+
+        }
+
+        public Reservation MapBookRoomToReservation(BookRoomRequestDto bookRoomRequestDto)
+        {
+            var result = _mapper.Map<Reservation>(bookRoomRequestDto);
+
+            return result;
+        }
     }
 }

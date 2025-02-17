@@ -16,6 +16,12 @@ namespace Hotels.Domain.Entities
 
         [Column("isenabled")]
         public bool IsEnabled { get; set; }
+        
+        [Column("city")]
+        public string City { get; set; }
+        
+        [Column("address")]
+        public string Address { get; set; }
 
         [Column("name")]
         public string Name { get; set; }

@@ -6,12 +6,12 @@ namespace Hotels.Business.UseCases
 {
     public class GetReservationsUseCase(IHotelRepository _repository, IHotelMapperService _mapperService) : IGetReservationsUseCase
     {
-        public async Task<List<ReservationDto>> ExecuteAsync(long agencyId)
+        public async Task<List<ReservationDto>> ExecuteAsync(GetResevationRequestDto getResevationRequestDto)
         {
             try
             {
                 await _repository.BeginTransaction();
-                var result = await _repository.GetReservationsById(agencyId);
+                var result = await _repository.GetReservationsById(getResevationRequestDto);
                 if (result is null || result.Count == 0)
                     return [];
 
