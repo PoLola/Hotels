@@ -12,6 +12,15 @@ namespace Hotels.Infrastructure.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Room>()
+                .Property(r => r.Taxes)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<Room>()
+                .Property(r => r.Price)
+                .HasPrecision(18, 2);
+
+            base.OnModelCreating(modelBuilder);
         }
 
         public async Task BeginTransaction()
